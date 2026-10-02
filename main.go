@@ -4,26 +4,24 @@ import "fmt"
 
 func main() {
 
-	//Уже совсем совсем не нубарь =)
-	//Уже совсем совсем не нубарь =)//Уже совсем совсем не нубарь =)//Уже совсем совсем не нубарь =)
 	var (
 		num1, num2 float64
 		sigh       string
 	)
 	fmt.Print("Введите первое значение: ")
-	_, err := fmt.Scan(&num1)
+	_, err := fmt.Scanln(&num1)
 	if err != nil {
 		fmt.Println("Неверно первое числовое значение.")
 		return
 	}
 	fmt.Print("Введите знак для вычисления: ")
-	_, err = fmt.Scan(&sigh)
+	_, err = fmt.Scanln(&sigh)
 	if err != nil {
 		fmt.Println("Неверный знак для вычисления.")
 		return
 	}
 	fmt.Print("Введите второе числовое значение: ")
-	_, err = fmt.Scan(&num2)
+	_, err = fmt.Scanln(&num2)
 	if err != nil {
 		fmt.Println("Неверно второе числовое значение.")
 		return
@@ -32,19 +30,51 @@ func main() {
 	switch sigh {
 
 	case "-":
-		fmt.Println("Ответ:", num1-num2)
+		answer, result := subtract(num1, num2)
+		fmt.Println(answer, result)
+
 	case "+":
-		fmt.Println("Ответ:", num1+num2)
+		answer, result := add(num1, num2)
+		fmt.Println(answer, result)
+
 	case "/":
-		if num2 != 0 {
-			fmt.Println("Ответ:", num1/num2)
-		} else {
-			fmt.Println("Делить на ноль нельзя.")
+		answer, result, err := divide(num1, num2)
+
+		if err != nil {
+
+			fmt.Println(err)
+			return
 		}
+		fmt.Println(answer, result)
+
 	case "*":
-		fmt.Println("Ответ:", num1*num2)
+		answer, result := multiply(num1, num2)
+		fmt.Println(answer, result)
+
 	default:
+
 		fmt.Println("Неверное выражение")
 	}
 
+}
+
+func add(a, b float64) (string, float64) {
+
+	return "Ответ:", a + b
+}
+
+func subtract(a, b float64) (string, float64) {
+	return "Ответ:", a - b
+
+}
+
+func multiply(a, b float64) (string, float64) {
+	return "Ответ:", a * b
+
+}
+func divide(a, b float64) (string, float64, error) {
+	if b == 0 {
+		return "Сережа лох", 0, fmt.Errorf("Ошибка: деление на ноль.")
+	}
+	return "Ответ:", a / b, nil
 }
