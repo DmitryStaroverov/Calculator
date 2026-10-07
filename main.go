@@ -74,7 +74,7 @@ func multiply(a, b float64) (string, float64) {
 }
 func divide(a, b float64) (string, float64, error) {
 	if b == 0 {
-		return "Сережа лох", 0, fmt.Errorf("Ошибка: деление на ноль.")
+		return "", 0, fmt.Errorf("ошибка: деление на ноль.")
 	}
 	return "Ответ:", a / b, nil
 }
